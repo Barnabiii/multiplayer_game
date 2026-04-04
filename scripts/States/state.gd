@@ -1,12 +1,15 @@
 extends Node
 class_name State
 
-var parent: CharacterBody2D
+signal Transitioned
 
-func enter() -> void:
+var puppet: CharacterBody3D
+var animator: AnimationPlayer
+
+func Enter() -> void:
 	pass
 
-func exit() -> void:
+func Exit() -> void:
 	pass
 
 func Update(_delta: float) -> void:

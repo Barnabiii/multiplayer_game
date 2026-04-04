@@ -1,6 +1,6 @@
 extends Node3D
 
-var peer = NodeTunnelPeer.new()
+var peer: NodeTunnelPeer = NodeTunnelPeer.new()
 @export var player_scene: PackedScene
 
 const PORT = 9998
@@ -30,20 +30,20 @@ func _on_join_pressed() -> void:
 	
 	$CanvasLayer.hide()
 
-func _exit_game(id):
+func _exit_game(id: int) -> void:
 	multiplayer.peer_disconnected.connect(del_player)
 	del_player(id)
 
-func add_player(id = 1):
-	var player = player_scene.instantiate()
+func add_player(id: int = 1) -> void:
+	var player: CharacterBody3D = player_scene.instantiate()
 	player.name = str(id)
 	call_deferred("add_child",player)
 	
-func del_player(id):
+func del_player(id: int) -> void:
 	rpc("_del_player",id)
 	
 @rpc("any_peer","call_local")
-func _del_player(id):
+func _del_player(id: int) -> void:
 	get_node(str(id)).queue_free()
 
 
