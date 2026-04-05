@@ -8,11 +8,19 @@
 
 config_version=5
 
+[animation]
+
+compatibility/default_parent_skeleton_in_mesh_instance_3d=true
+
 [application]
 
 config/name="multiplayer_test"
-run/main_scene="res://scenes/game.tscn"
-config/features=PackedStringArray("4.5", "GL Compatibility")
+run/main_scene="res://game/game.tscn"
+config/features=PackedStringArray("4.6", "GL Compatibility")
+
+[debug]
+
+gdscript/warnings/untyped_declaration=1
 
 [editor_plugins]
 
@@ -57,3 +65,4 @@ renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 textures/vram_compression/import_s3tc_bptc=true
 textures/vram_compression/import_etc2_astc=true
+anti_aliasing/quality/msaa_3d=1

@@ -1,0 +1,163 @@
+[gd_scene format=3 uid="uid://cfs0afulnjhvd"]
+
+[ext_resource type="Script" uid="uid://6q0dl6ce6tgf" path="res://game/game.gd" id="1_dxrkv"]
+[ext_resource type="PackedScene" uid="uid://bsii42ypdsofm" path="res://player/player.tscn" id="2_dakft"]
+[ext_resource type="Texture2D" uid="uid://buib6whlfewrs" path="res://assets/textures/purple.png" id="3_u5opy"]
+[ext_resource type="Texture2D" uid="uid://le7sp23gv1g4" path="res://assets/textures/white.png" id="4_y36n6"]
+[ext_resource type="Texture2D" uid="uid://cdhnflgl0411r" path="res://assets/textures/black.png" id="5_l8g03"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_hve3p"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_mfdv2"]
+sky_material = SubResource("ProceduralSkyMaterial_hve3p")
+
+[sub_resource type="Environment" id="Environment_iotsf"]
+background_mode = 2
+sky = SubResource("Sky_mfdv2")
+tonemap_mode = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dxrkv"]
+size = Vector3(0.6, 2, 12)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_215e1"]
+albedo_texture = ExtResource("3_u5opy")
+uv1_scale = Vector3(0.44, 0.44, 0.44)
+uv1_triplanar = true
+
+[sub_resource type="BoxMesh" id="BoxMesh_7sc4i"]
+size = Vector3(0.5, 2, 12)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lc2xo"]
+size = Vector3(0.6, 2, 7)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_80cx4"]
+albedo_texture = ExtResource("4_y36n6")
+uv1_scale = Vector3(0.5, 0.5, 0.5)
+uv1_triplanar = true
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_e8heu"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rvswv"]
+albedo_texture = ExtResource("5_l8g03")
+uv1_scale = Vector3(3, 3, 3)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_boyg6"]
+size = Vector2(20, 20)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7jktm"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+
+[node name="game" type="Node3D" unique_id=370551698]
+script = ExtResource("1_dxrkv")
+player_scene = ExtResource("2_dakft")
+
+[node name="SunLight" type="DirectionalLight3D" parent="." unique_id=588134363]
+transform = Transform3D(-0.47059357, -0.6550353, -0.5911605, -0.7270088, -0.09180738, 0.6804625, -0.49999994, 0.75000006, -0.43301266, 26.61973, 5.835471, 9.536743e-07)
+shadow_enabled = true
+
+[node name="Sky" type="WorldEnvironment" parent="." unique_id=585734895]
+environment = SubResource("Environment_iotsf")
+
+[node name="slide2" type="StaticBody3D" parent="." unique_id=681833776]
+transform = Transform3D(-4.371139e-08, -1, 0, 0.7483078, -3.270958e-08, -0.6633519, 0.6633519, -2.899603e-08, 0.7483078, 7.750369, 3.5972977, 1.4320874)
+
+[node name="collider" type="CollisionShape3D" parent="slide2" unique_id=1286138686]
+shape = SubResource("BoxShape3D_dxrkv")
+
+[node name="mesh" type="MeshInstance3D" parent="slide2" unique_id=1614440005]
+transform = Transform3D(1, 1.7763568e-15, -2.9802322e-08, -1.7763568e-15, 1, 1.7763568e-15, 2.9802322e-08, 0, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_215e1")
+mesh = SubResource("BoxMesh_7sc4i")
+skeleton = NodePath("../../slide2")
+
+[node name="wall" type="StaticBody3D" parent="." unique_id=1632510158]
+transform = Transform3D(0.86336035, 0, 0.5045879, 0, 1, 0, -0.5045879, 0, 0.86336035, -4.363, 1.5, 3.1232638)
+
+[node name="collider" type="CollisionShape3D" parent="wall" unique_id=1594317135]
+shape = SubResource("BoxShape3D_lc2xo")
+
+[node name="mesh" type="MeshInstance3D" parent="wall" unique_id=1726344179]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.54683447, 0)
+material_override = SubResource("StandardMaterial3D_80cx4")
+mesh = SubResource("BoxMesh_7sc4i")
+
+[node name="plane" type="StaticBody3D" parent="." unique_id=326143053]
+
+[node name="collider" type="CollisionShape3D" parent="plane" unique_id=131169591]
+shape = SubResource("WorldBoundaryShape3D_e8heu")
+
+[node name="mesh" type="MeshInstance3D" parent="plane" unique_id=67146828]
+material_override = SubResource("StandardMaterial3D_rvswv")
+mesh = SubResource("PlaneMesh_boyg6")
+skeleton = NodePath("../..")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=406984497]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=1947979239]
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -113.0
+offset_right = 100.0
+offset_bottom = 113.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="CanvasLayer/HBoxContainer" unique_id=2067026780]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="Label" type="Label" parent="CanvasLayer/HBoxContainer/VBoxContainer2" unique_id=1565494649]
+visible = false
+layout_mode = 2
+text = "Click ID to copy"
+horizontal_alignment = 1
+
+[node name="OnlineID" type="Button" parent="CanvasLayer/HBoxContainer/VBoxContainer2" unique_id=411462141]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(200, 60)
+layout_mode = 2
+focus_mode = 0
+theme_override_styles/normal = SubResource("StyleBoxFlat_7jktm")
+text = "Loading..."
+
+[node name="Host" type="Button" parent="CanvasLayer/HBoxContainer/VBoxContainer2" unique_id=1650313140]
+visible = false
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+text = "HOST"
+
+[node name="Join" type="Button" parent="CanvasLayer/HBoxContainer/VBoxContainer2" unique_id=961708334]
+visible = false
+custom_minimum_size = Vector2(200, 80)
+layout_mode = 2
+text = "JOIN"
+
+[node name="HostOnlineID" type="LineEdit" parent="CanvasLayer/HBoxContainer/VBoxContainer2" unique_id=1139853401]
+unique_name_in_owner = true
+visible = false
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+placeholder_text = "Join Address"
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="." unique_id=183966962]
+_spawnable_scenes = PackedStringArray("uid://bsii42ypdsofm")
+spawn_path = NodePath("..")
+
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/VBoxContainer2/OnlineID" to="." method="_on_online_id_pressed"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/VBoxContainer2/Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="CanvasLayer/HBoxContainer/VBoxContainer2/Join" to="." method="_on_join_pressed"]
