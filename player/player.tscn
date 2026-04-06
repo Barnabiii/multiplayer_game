@@ -2,9 +2,10 @@
 
 [ext_resource type="Script" uid="uid://b63pxsmp17tal" path="res://player/player.gd" id="1_g2els"]
 [ext_resource type="Script" uid="uid://6g8e2r2hfwdv" path="res://player/Input.gd" id="2_boad6"]
-[ext_resource type="Script" uid="uid://cge7d0y3aryeu" path="res://resources/States/state_machine.gd" id="2_qhqgy"]
+[ext_resource type="Script" uid="uid://cge7d0y3aryeu" path="res://resources/States/locomotion_sm.gd" id="2_qhqgy"]
 [ext_resource type="Script" uid="uid://bmnkjudmx76a8" path="res://player/States/PlayerIdleState.gd" id="3_qhqgy"]
 [ext_resource type="Script" uid="uid://ctjtt6vwcq22u" path="res://player/States/PlayerRunState.gd" id="4_dqkch"]
+[ext_resource type="Resource" uid="uid://dkiv5jfu2efil" path="res://player/movement_settings.tres" id="4_rgyib"]
 [ext_resource type="Script" uid="uid://ceaoxyduhfboy" path="res://player/States/PlayerJumpState.gd" id="5_qlg0r"]
 [ext_resource type="Script" uid="uid://cb12n8cxgvdqq" path="res://player/States/PlayerFallState.gd" id="6_tuyoq"]
 
@@ -17210,9 +17211,11 @@ properties/2/path = NodePath("Mesh:rotation")
 properties/2/spawn = true
 properties/2/replication_mode = 1
 
-[node name="player" type="CharacterBody3D" unique_id=279729558]
+[node name="player" type="CharacterBody3D" unique_id=279729558 node_paths=PackedStringArray("input_gatherer", "state_machine")]
 collision_layer = 2
 script = ExtResource("1_g2els")
+input_gatherer = NodePath("Input")
+state_machine = NodePath("Locomotion")
 
 [node name="Mesh" type="Node3D" parent="." unique_id=1459171673]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
@@ -17705,22 +17708,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.4800181)
 script = ExtResource("2_boad6")
 metadata/_custom_type_script = "uid://6g8e2r2hfwdv"
 
-[node name="StateMachine" type="Node" parent="." unique_id=55656308 node_paths=PackedStringArray("initial_state", "puppet", "animation_player")]
+[node name="Locomotion" type="Node" parent="." unique_id=55656308 node_paths=PackedStringArray("initial_state", "puppet", "animation_player")]
 script = ExtResource("2_qhqgy")
 initial_state = NodePath("Idle")
 puppet = NodePath("..")
 animation_player = NodePath("../Mesh/AnimationPlayer")
+settings = ExtResource("4_rgyib")
 
-[node name="Idle" type="Node" parent="StateMachine" unique_id=56025057]
+[node name="Idle" type="Node" parent="Locomotion" unique_id=56025057]
 script = ExtResource("3_qhqgy")
 
-[node name="Run" type="Node" parent="StateMachine" unique_id=382174028]
+[node name="Run" type="Node" parent="Locomotion" unique_id=382174028]
 script = ExtResource("4_dqkch")
 
-[node name="Jump" type="Node" parent="StateMachine" unique_id=31897847]
+[node name="Jump" type="Node" parent="Locomotion" unique_id=31897847]
 script = ExtResource("5_qlg0r")
 
-[node name="Fall" type="Node" parent="StateMachine" unique_id=1277378001]
+[node name="Fall" type="Node" parent="Locomotion" unique_id=1277378001]
 script = ExtResource("6_tuyoq")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="." unique_id=46236734]

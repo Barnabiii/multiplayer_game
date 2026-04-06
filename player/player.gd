@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
-@onready var input_gatherer: InputGatherer = $Input
-@onready var state_machine: StateMachine = $StateMachine
+@export var input_gatherer: InputGatherer
+@export var state_machine: LocomotionStateMachine
 
 const SENSITIVITY = 0.0015
 
@@ -26,9 +26,13 @@ func _physics_process(delta: float) -> void:
 	var input: InputPackage = input_gatherer.gather_input()
 	state_machine.physics_update(input,delta)
 	move_and_slide()
+	
+	if input.is_quitting:
+		$".."._exit_game(name.to_int())
+		get_tree().quit()
 
 func _notification(what: int) -> void:
 	if what == NOTIFICATION_WM_CLOSE_REQUEST:
 		if is_multiplayer_authority():
-			$"../"._exit_game(name.to_int())
+			$".."._exit_game(name.to_int())
 			get_tree().quit()

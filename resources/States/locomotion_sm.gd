@@ -1,8 +1,10 @@
-class_name StateMachine extends Node
+class_name LocomotionStateMachine extends Node
 
 @export var initial_state: State
 @export var puppet: CharacterBody3D
 @export var animation_player: AnimationPlayer
+
+@export var settings: LocomotionSettings
 
 var current_state: State
 var states : Dictionary = {}
@@ -13,13 +15,11 @@ func _ready() -> void:
 			states[child.name.to_lower()] = child
 			child.Puppet = puppet
 			child.Animator = animation_player
+			child.Settings = settings
 
 	if initial_state:
 		initial_state.enter()
 		current_state = initial_state
-
-func _process(delta: float) -> void:
-	current_state.update(delta)
 
 func physics_update(input: InputPackage, delta: float) -> void:
 	if not puppet.is_multiplayer_authority():
@@ -29,16 +29,13 @@ func physics_update(input: InputPackage, delta: float) -> void:
 	if next_state != "self":
 		switch_to(next_state)
 	
-	if Input.is_action_just_pressed("quit"):
-		$"../.."._exit_game(puppet.name.to_int())
-		puppet.get_tree().quit()
-	
 	if current_state:
-		current_state.physics_update(input, delta)
+		current_state.update(input, delta)
 
 func switch_to(new_state_name: String) -> void:
 	if not puppet.is_multiplayer_authority():
 		return
+	print(new_state_name)
 	var new_state: State = states[new_state_name.to_lower()]
 	if !new_state:
 		return

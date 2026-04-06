@@ -30,7 +30,7 @@ uv1_triplanar = true
 size = Vector3(0.5, 2, 12)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lc2xo"]
-size = Vector3(0.6, 2, 7)
+size = Vector3(0.6, 2, 12)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_80cx4"]
 albedo_texture = ExtResource("4_y36n6")
@@ -82,13 +82,12 @@ mesh = SubResource("BoxMesh_7sc4i")
 skeleton = NodePath("../../slide2")
 
 [node name="wall" type="StaticBody3D" parent="." unique_id=1632510158]
-transform = Transform3D(0.86336035, 0, 0.5045879, 0, 1, 0, -0.5045879, 0, 0.86336035, -4.363, 1.5, 3.1232638)
+transform = Transform3D(0.86336035, 0, 0.5045879, 0, 1, 0, -0.5045879, 0, 0.86336035, -4.363, 0.965909, 3.1232638)
 
 [node name="collider" type="CollisionShape3D" parent="wall" unique_id=1594317135]
 shape = SubResource("BoxShape3D_lc2xo")
 
 [node name="mesh" type="MeshInstance3D" parent="wall" unique_id=1726344179]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.54683447, 0)
 material_override = SubResource("StandardMaterial3D_80cx4")
 mesh = SubResource("BoxMesh_7sc4i")
 
