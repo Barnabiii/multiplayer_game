@@ -16,6 +16,10 @@ func _ready() -> void:
 		child.visible = true
 
 func _on_host_pressed() -> void:
+	for child in $CanvasLayer/HBoxContainer/VBoxContainer2.get_children():
+		child.visible = false
+	%OnlineID.visible = true
+	%OnlineID.text = "Loading..."
 	peer.host()
 	await peer.hosting
 	
@@ -27,6 +31,10 @@ func _on_host_pressed() -> void:
 
 
 func _on_join_pressed() -> void:
+	for child in $CanvasLayer/HBoxContainer/VBoxContainer2.get_children():
+		child.visible = false
+	%OnlineID.visible = true
+	%OnlineID.text = "Loading..."
 	peer.join(%HostOnlineID.text)
 	
 	await peer.joined

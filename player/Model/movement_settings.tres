@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="LocomotionSettings" format=3 uid="uid://dkiv5jfu2efil"]
+
+[ext_resource type="Script" uid="uid://d2qa0qv1t14mm" path="res://player/Model/MovementSettings.gd" id="1_t3t4r"]
+
+[resource]
+script = ExtResource("1_t3t4r")
+metadata/_custom_type_script = "uid://d2qa0qv1t14mm"

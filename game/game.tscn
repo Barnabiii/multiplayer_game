@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://6q0dl6ce6tgf" path="res://game/game.gd" id="1_dxrkv"]
 [ext_resource type="PackedScene" uid="uid://bsii42ypdsofm" path="res://player/player.tscn" id="2_dakft"]
 [ext_resource type="Texture2D" uid="uid://buib6whlfewrs" path="res://assets/textures/purple.png" id="3_u5opy"]
+[ext_resource type="Texture2D" uid="uid://bgapv76eld1qh" path="res://assets/textures/texture_07.png" id="4_dakft"]
 [ext_resource type="Texture2D" uid="uid://le7sp23gv1g4" path="res://assets/textures/white.png" id="4_y36n6"]
 [ext_resource type="Texture2D" uid="uid://cdhnflgl0411r" path="res://assets/textures/black.png" id="5_l8g03"]
 
@@ -18,8 +19,8 @@ background_mode = 2
 sky = SubResource("Sky_mfdv2")
 tonemap_mode = 2
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_dxrkv"]
-size = Vector3(0.6, 2, 12)
+[sub_resource type="BoxShape3D" id="BoxShape3D_u5opy"]
+size = Vector3(0.5, 2, 8)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_215e1"]
 albedo_texture = ExtResource("3_u5opy")
@@ -27,10 +28,19 @@ uv1_scale = Vector3(0.44, 0.44, 0.44)
 uv1_triplanar = true
 
 [sub_resource type="BoxMesh" id="BoxMesh_7sc4i"]
-size = Vector3(0.5, 2, 12)
+size = Vector3(0.5, 2, 8)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dxrkv"]
+size = Vector3(2, 5, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_y36n6"]
+albedo_texture = ExtResource("4_dakft")
+
+[sub_resource type="BoxMesh" id="BoxMesh_dxrkv"]
+size = Vector3(2, 5, 2)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_lc2xo"]
-size = Vector3(0.6, 2, 12)
+size = Vector3(0.6, 2, 8)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_80cx4"]
 albedo_texture = ExtResource("4_y36n6")
@@ -70,15 +80,27 @@ shadow_enabled = true
 environment = SubResource("Environment_iotsf")
 
 [node name="slide2" type="StaticBody3D" parent="." unique_id=681833776]
-transform = Transform3D(-4.371139e-08, -1, 0, 0.7483078, -3.270958e-08, -0.6633519, 0.6633519, -2.899603e-08, 0.7483078, 7.750369, 3.5972977, 1.4320874)
+transform = Transform3D(-4.371139e-08, -1, 0, 0.9007589, -3.9373425e-08, -0.4343196, 0.4343196, -1.8984707e-08, 0.9007589, 5.44384, 1.3831863, 2.744451)
 
 [node name="collider" type="CollisionShape3D" parent="slide2" unique_id=1286138686]
-shape = SubResource("BoxShape3D_dxrkv")
+shape = SubResource("BoxShape3D_u5opy")
 
 [node name="mesh" type="MeshInstance3D" parent="slide2" unique_id=1614440005]
 transform = Transform3D(1, 1.7763568e-15, -2.9802322e-08, -1.7763568e-15, 1, 1.7763568e-15, 2.9802322e-08, 0, 1, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_215e1")
 mesh = SubResource("BoxMesh_7sc4i")
+skeleton = NodePath("../../slide2")
+
+[node name="slide3" type="StaticBody3D" parent="." unique_id=2101312421]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.44384, 1.5793223, -5.213854)
+
+[node name="collider" type="CollisionShape3D" parent="slide3" unique_id=353063915]
+shape = SubResource("BoxShape3D_dxrkv")
+
+[node name="mesh" type="MeshInstance3D" parent="slide3" unique_id=172511696]
+transform = Transform3D(1, 1.7763568e-15, -2.9802322e-08, -1.7763568e-15, 1, 1.7763568e-15, 2.9802322e-08, 0, 1, 0, 0, 0)
+material_override = SubResource("StandardMaterial3D_y36n6")
+mesh = SubResource("BoxMesh_dxrkv")
 skeleton = NodePath("../../slide2")
 
 [node name="wall" type="StaticBody3D" parent="." unique_id=1632510158]
