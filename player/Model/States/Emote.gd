@@ -1,5 +1,5 @@
 extends State
-class_name Idle
+class_name Emote
 
 var foot_ray : RayCast3D
 
@@ -7,11 +7,11 @@ func get_next_state(input: InputPackage) -> String:
 	if not foot_ray:
 		return "MidAir"
 	input.actions.sort_custom(moves_priority_sort)
-	return input.actions[0]
+	return input.actions[0] if input.actions[0] != "Idle" else "none"
 
 
 func enter() -> void:
-	animation = "_moves/idle"
+	animation = "_moves/dance_chicken"
 	Puppet.velocity.y  = 0
 	foot_ray = Puppet.get_node("foot_raycast")
 

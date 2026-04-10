@@ -1,8 +1,10 @@
 extends State
 class_name Run
 
+var foot_ray : RayCast3D
+
 func get_next_state(input: InputPackage) -> String:
-	if not Puppet.is_on_floor():
+	if not foot_ray.is_colliding():
 		return "MidAir"
 	input.actions.sort_custom(moves_priority_sort)
 	return input.actions[0]
@@ -13,7 +15,8 @@ func get_next_state(input: InputPackage) -> String:
 
 
 func enter() -> void:
-	animation = "moves/running"
+	animation = "_moves/running"
+	foot_ray = Puppet.get_node("foot_raycast")
 
 
 func update(input: InputPackage, delta: float) -> void:	

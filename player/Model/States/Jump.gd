@@ -7,7 +7,7 @@ const JUMP_TIME = 0.1
 var jumped: bool = false
 
 func enter() -> void:
-	animation = "moves/jump_start"
+	animation = "_moves/jump_start"
 
 func get_next_state(_input: InputPackage) -> String:
 	if works_longer_than(TRANSITION_TIME):

@@ -1,7 +1,7 @@
 extends Node
 class_name PlayerModel
 
-@export var initial_state: State
+@onready var initial_state: State = get_node("MidAir")
 @onready var puppet: CharacterBody3D = $".."
 @onready var animator: AnimationPlayer = $AnimationPlayer
 @onready var skeleton: Skeleton3D = $GeneralSkeleton
@@ -20,6 +20,7 @@ func _ready() -> void:
 
 	if initial_state:
 		initial_state.enter()
+		animator.play(initial_state.animation)
 		current_state = initial_state
 
 func physics_update(input: InputPackage, delta: float) -> void:
@@ -46,7 +47,6 @@ func switch_to(new_state_name: String) -> void:
 	new_state.enter()
 	new_state.mark_enter_time()
 	animator.play(new_state.animation)
-
 	current_state = new_state
 
 func handheld_to_hand() -> void:

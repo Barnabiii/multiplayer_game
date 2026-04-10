@@ -12,6 +12,9 @@ func gather_input() -> InputPackage:
 	if new_input.input_direction != Vector2.ZERO:
 		new_input.actions.append("Run")
 	
+	if Input.is_action_just_pressed("emote1"):
+		new_input.actions.append("Emote")
+	
 	if new_input.actions.is_empty():
 		new_input.actions.append("Idle")
 	

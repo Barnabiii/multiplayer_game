@@ -1,15 +1,17 @@
 extends State
 class_name MidAir 
 
+var foot_ray : RayCast3D
+
 func get_next_state(_input: InputPackage) -> String:
-	if Puppet.is_on_floor():
+	if foot_ray.is_colliding():
 		return "Land"
 	return "none"
 
 
 func enter() -> void:
-	animation = "moves/midair"
-
+	animation = "_moves/midair"
+	foot_ray = Puppet.get_node("foot_raycast")
 
 func update(input: InputPackage, delta: float) -> void:
 	Puppet.velocity.y -= Settings.gravity * delta

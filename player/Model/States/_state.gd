@@ -9,7 +9,8 @@ var enter_time: float
 
 static var state_priority: Dictionary = {
 	"Idle" : 1,
-	"Run" : 2,
+	"Emote" : 2,
+	"Run" : 3,
 	"Jump" : 10
 }
 
