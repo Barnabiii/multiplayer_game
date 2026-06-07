@@ -7,7 +7,7 @@ func gather_input() -> InputPackage:
 	
 	if Input.is_action_just_pressed("space"):
 		new_input.actions.append("Jump")
-
+	
 	new_input.input_direction = Input.get_vector("left", "right", "up", "down")
 	if new_input.input_direction != Vector2.ZERO:
 		new_input.actions.append("Run")

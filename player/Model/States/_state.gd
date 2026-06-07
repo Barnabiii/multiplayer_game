@@ -11,6 +11,7 @@ static var state_priority: Dictionary = {
 	"Idle" : 1,
 	"Emote" : 2,
 	"Run" : 3,
+	"Crouch": 5,
 	"Jump" : 10
 }
 

@@ -48,6 +48,7 @@ func switch_to(new_state_name: String) -> void:
 	new_state.mark_enter_time()
 	animator.play(new_state.animation)
 	current_state = new_state
+	print(new_state_name)
 
 func handheld_to_hand() -> void:
 	var hand_id : int = skeleton.find_bone("RightHand")
