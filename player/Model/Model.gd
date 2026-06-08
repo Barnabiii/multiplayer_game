@@ -33,7 +33,6 @@ func physics_update(input: InputPackage, delta: float) -> void:
 	
 	if current_state:
 		current_state.update(input, delta)
-	handheld_to_hand()
 
 func switch_to(new_state_name: String) -> void:
 	if not puppet.is_multiplayer_authority():
@@ -49,9 +48,3 @@ func switch_to(new_state_name: String) -> void:
 	animator.play(new_state.animation)
 	current_state = new_state
 	print(new_state_name)
-
-func handheld_to_hand() -> void:
-	var hand_id : int = skeleton.find_bone("RightHand")
-	var hand_transform: Transform3D = skeleton.get_bone_global_pose(hand_id)
-	var handheld : Node3D = puppet.get_node("Visuals").get_node("Handheld")
-	handheld.transform = hand_transform
